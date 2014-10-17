@@ -8,10 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "CorePlot-CocoaTouch.h"
-@interface ViewController : UIViewController<CPTPlotDataSource>
-{
-    NSMutableArray *dataArray;
-    NSMutableArray *dataArray2;
-}
+@interface ViewController : UIViewController<CPTPlotDataSource, CPTPlotSpaceDelegate>
+
 @end
 
