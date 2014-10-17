@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "CorePlot-CocoaTouch.h"
-@interface ViewController : UIViewController<CPTPlotDataSource, CPTPlotSpaceDelegate>
+@interface ViewController : UIViewController<CPTPlotDataSource, CPTPlotSpaceDelegate, NSURLConnectionDataDelegate, NSURLConnectionDelegate>
 
 @end
 

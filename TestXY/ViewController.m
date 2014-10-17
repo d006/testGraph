@@ -21,9 +21,12 @@ CPTScatterPlot *scatterPlot;
 CPTScatterPlot *linePlot;
 NSTimeInterval oneDay;
 NSDate *refDate;
+NSMutableData *webData;
+
 @implementation ViewController
 
 - (void) viewDidAppear:(BOOL)animated {
+    [self Conn];
     vitalLineCount = 0;
     linePosition = 0;
     self.dictVitalSignXYData= [[NSMutableDictionary alloc]init];
@@ -408,6 +411,26 @@ NSDate *refDate;
 //讓key=id value=array放入dictionary
 - (void)BuildDataDictLineId:(NSString *)key DataArray:(NSMutableArray *)value{
     [self.dictVitalSignXYData setValue:value forKey:key] ;
+}
+
+
+//取得資料的連線方式設定
+-(void)Conn{
+    NSURL *url = [NSURL URLWithString:
+                  @""];
+    NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];
+    NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:urlRequest delegate:self startImmediately:YES];
+    if (conn) {
+        webData = [NSMutableData data];
+        NSLog(@"Conn");
+    }
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data{
+    [webData appendData:data];
+    NSLog(@"didReceiveData");
+    NSString *responseString = [[NSString alloc] initWithData:webData encoding:NSUTF8StringEncoding];
+    NSLog(@"viewDidAppear:ConnData=%@",responseString);
 }
 
 @end
